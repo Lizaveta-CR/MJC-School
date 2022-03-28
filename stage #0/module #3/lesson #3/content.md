@@ -107,9 +107,8 @@ To summarize:
      
         String currentDate = "The 31st" + " " + "of January" + ", ";
  2. String is immutable. 
-    Since string literals with the same contents share storage in the common pool, Java's String is designed to be immutable. That is, once a String is constructed, its contents cannot be modified. Otherwise, the other String references sharing the same storage location will be affected by the change, which can be unpredictable and therefore is undesirable.
-    
-    What does it mean in practise?
+    Once a String is constructed, its contents cannot be modified.
+
     Let's consider the following example:
       
         String myStr = "CONVERT ME TO LOWER CASE";
@@ -189,6 +188,16 @@ Object class is present in java.lang package.The Object class is the parent clas
 It was introduced in JDK1.0.
 ![image info](media/wrapper-class-in-java.jpg)
 
+As Object is a parent for all clases in Java, the coding is mostly wrapped in Java objects. You cannot code anything in Java without declaring classes and objects.
+Let's remember the best known program which simply prints "Hello World!": 
+```
+class HelloWorldMain {
+   public static void main(String[] args) {
+      System.out.println("Hello World!");
+   }
+}
+```
+To do that we declared a class - HelloWorldMain. Because more than 90% of coding involves objects, It is popularly said that "Everything is an object in Java".
 ### Object Class Basic Methods
  1. toString();
     This method returns the string representation of this object. Keep in mind that it "textually represents" this object. The default behavior is to print class name, then @,
