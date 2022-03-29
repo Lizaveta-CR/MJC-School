@@ -90,7 +90,8 @@ To summarize:
          String a = str.substring(1);  // a is "arry Potter" (i.e. starting at index 1)
          String b = str.substring(2);  // b is "rry Potter"
          String c = str.substring(3);  // c is "ry Potter"
-       The start (begin index) parameter must be within the range of source string, otherwise you would see the following exception:
+       The start (begin index) parameter must be within the range of source string, otherwise you would see the following exception (it will
+       be discussed further, but currently take in mind that it only means that something went wrong with your code and it tells "String index out of range"):
     
          java.lang.StringIndexOutOfBoundsException: String index out of range:
    
@@ -106,6 +107,46 @@ To summarize:
     Keep in mind that Strings not made of the letters a-z. For example chars can be punctuation:
      
         String currentDate = "The 31st" + " " + "of January" + ", ";
+    
+    Also you could use concat(String strToConcat) method is String class:
+    ```
+    String firstStr = "Java";
+    String secondStr = " World";
+    String resultSrt = firstStr.concat(secondStr); //Java World
+    ```
+    or even like this:
+     ```
+     String firstStr = "Java";
+     String secondStr = " World";
+     String thirdStr = "!";
+     String resultSrt = firstStr.concat(secondStr).concat(thirdStr); //Java World!
+      ```
+    What is the difference between "+" and "concat"?
+    Let's not deep dive into it and discuss basics:
+    1. concat() is a method and comes under java.lang.String package, but "+" is just an operator and not a method;
+    2. The concat method could only take string as input and would ask for compile time error if any other type of input has been provided to it:
+    ```
+    String str = "String Error Example";
+    String concatResult = str.concat(3);//it will not compile
+    ```
+    However, + operator could take any type of input and convert it to a string before append to the target string:
+    ```
+    String currentDate = "The " + 31 + " of January " + 2022;
+    System.out.println(currentDate);
+    ```
+    Output:
+    ```
+    The 31 of January 2022
+    ```
+    Take a look at this example:
+    ```
+    String currentDate = 31 + " 1 " + 2022;
+    System.out.println(currentDate);
+    ```
+    Output:
+    ```
+    31 1 2022
+    ```
  2. String is immutable. 
     Once a String is constructed, its contents cannot be modified.
 
@@ -234,7 +275,34 @@ To do that we declared a class - HelloWorldMain. Because more than 90% of coding
     ```
     false
     ```
- 3. getClass();
+ 3. hashCode();
+    A hash code is an integer value that is associated with each object in Java. This method returns the same integer value (when called on the same object during the same instance of a Java application).
+    You will explore its usage in further topics, but let's take through a basic example:
+    
+    ```class HashMain{
+        public static void main(String[] args){
+            String a = "1999";
+            String b = "1999";
+    
+            if(a.equals(b)){
+                System.out.println("Equal variables:");
+                System.out.println(a.hashCode() + "\n" + b.hashCode());
+            }
+    
+            String c = "2000";
+            String d = "2022";
+    
+            if(!c.equals(d)){
+                System.out.println("non equal variables:");
+                System.out.println(c.hashCode() + "\n" + d.hashCode());
+            }
+        }
+    }
+    ```
+    Run this code and see that when you call hashCode() on equal objects (equals() returns "true"), then it returns the same 
+    hash code value, however, this is not always true in the opposite direction.
+    ![image info](media/hashCode.png)
+ 4. getClass();
  Is used to get the actual runtime class of the object. It can also be used to get metadata of this class (for example name)
  
     Explanation:
